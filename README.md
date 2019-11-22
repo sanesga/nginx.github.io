@@ -133,6 +133,82 @@ Este primer sitio permitirá visualizar una página php.
 
 - Insertamos contenido en el archivo
 
+  ```
+  vim index.php
+  ```
+
+  ![img](img/captura6.png)
+
+- Creamos el fichero de configuración de nuestro host virtual dentro del directorio /etc/nginx/sites-availabe, copiando el que nos proporciona Nginx por defecto (default) y que está situado en esa misma carpeta. Lo renombramos a sitioPhp.
+
+ ![img](img/captura7.png)
+
+- Lo editamos:
+
+  - Cambiamos el puerto por donde publicaremos la página:
+
+     ![img](img/captura8.png)
+
+  - Le damos un nombre a nuestro servidor:
+
+   ![img](img/captura13.png)
+
+  - Modificamos el directorio donde se encuentra nuestra página:
+
+    ![img](img/captura11.png)
+
+  - Añadimos index.php tal como nos indica en el archivo de configuración, para que se reconozca nuestra aplicación:
+
+   ![img](img/captura12.png)
+
+  - Habilitamos el sitio, creando un enlace simbólico dentro de la carpeta _sites-enabled_ que hará referencia al fichero de configuración de nuestro host, creado en el directorio _sites-available_:
+
+    ```
+    sudo ln -s /etc/nginx/sites-available/sitioPhp /etc/nginx/sites-enabled
+    ```
+
+    ![img](img/captura10.png)
+
+    - Verificamos sintaxis.
+ 
+    ```
+    sudo nginx -t
+    ```
+
+    ![img](img/captura9.png)
+
+  - Recargamos la configuración de Nginx:
+
+    ```
+    sudo service nginx reload
+    ```
+
+  - Instalar php
+  sudo apt install php-7.2
+  php -v
+  - Donar permisos a totes les carpetes
+  - descomentar la part de php canviant la versio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
