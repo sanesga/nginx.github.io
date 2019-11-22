@@ -1,0 +1,11 @@
+{
+  "name": "holamundo",
+  "version": "1.0.0",
+  "description": "Aplicacion node para practica Apache",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Sandra Esplugues",
+  "license": "ISC"
+}

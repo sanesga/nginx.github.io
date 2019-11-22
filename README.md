@@ -49,9 +49,9 @@ de Nginx, utilizamos el siguiente comando:
 
 Los perfiles que ofrece Nginx son:
 
-- Nginx Full: Abre el puerto 80 (tráfico normal, no cifrado) y el 443 (tráfico TLS/SSL cifrado).
-- Nginx HTTP: Solo abre el puerto 80.
-- Nginx HTTPS: Solo abre el puerto 443.
+- **Nginx Full**: Abre el puerto 80 (tráfico normal, no cifrado) y el 443 (tráfico TLS/SSL cifrado).
+- **Nginx HTTP**: Solo abre el puerto 80.
+- **Nginx HTTPS**: Solo abre el puerto 443.
 
 Elegimos habilitar el perfil _Full_, para ello tecleamos el siguente comando:
 
@@ -116,7 +116,7 @@ Este primer sitio permitirá visualizar una página php.
   ![img](img/captura4.png)
 
 
-  - Otorgamos permisos de acceso y modificación.
+- Otorgamos permisos de acceso y modificación.
 
   ```
   sudo chmod -R 755 /var/www/sitioPhp
@@ -141,7 +141,7 @@ Este primer sitio permitirá visualizar una página php.
 
 - Creamos el fichero de configuración de nuestro host virtual dentro del directorio /etc/nginx/sites-availabe, copiando el que nos proporciona Nginx por defecto (default) y que está situado en esa misma carpeta. Lo renombramos a sitioPhp.
 
- ![img](img/captura7.png)
+  ![img](img/captura7.png)
 
 - Lo editamos:
 
@@ -216,7 +216,7 @@ Este primer sitio permitirá visualizar una página php.
 - Añadimos la directiva _access_log_ con su ruta, en el archivo de configuración de nuestro host (sitioPhp) situado en la ruta _/etc/nginx/sites-available_. Especificando asímismo el nombre que queremos darle al archivo de logs (se creará automáticamente).
 
 
-![img](img/captura17.png)
+  ![img](img/captura17.png)
 
 - Verificamos sintaxis.
 
@@ -224,7 +224,7 @@ Este primer sitio permitirá visualizar una página php.
 
 - Verificamos que el archivo se ha creado correctamente en la ruta y verificamos que guarde los logs:
 
-![img](img/captura19.png)
+  ![img](img/captura19.png)
 
 ## 4. ACTIVAR LA COMPRESIÓN DE FICHEROS QUE SUPEREN LOS 80KB.
 
@@ -232,11 +232,11 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
 - Primero, creamos una carpeta nueva llamada _plantilla_ en el directorio de nuestra aplicación (_/var/etc/wwww/sitioPhp_) y dentro nos descargamos la plantilla css del siguiente enlace: https://startbootstrap.com/themes/freelancer/
 
-![img](img/captura23.png)
+  ![img](img/captura23.png)
 
 - Entramos en el navegador y accedemos a la plantilla desde nuestra página en localhost:82/plantilla/ y en el apartado Network, observamos que su tamaño inicial es de 24,5 KB.
 
-![img](img/captura22.png)
+  ![img](img/captura22.png)
 
 - Para proceder con la compresión, primero habilitamos Gzip en nuestro servidor:
 
@@ -244,7 +244,7 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
    - En el apartado Gzip Settings, establecemos la directiva Gzip a on, descomentando todas las opciones y añadiendo _gzip_min_length 80;_ para que se aplique la compresión a los archivos mayores de 80 KB, como es nuestro caso.
 
-    ![img](img/captura20.png)
+     ![img](img/captura20.png)
 
   - Verificamos sintaxis.
 
@@ -252,7 +252,7 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
   - Volvemos a entrar al navegador y comprobamos que los datos se han comprimido y el tamaño ha pasado de 24,5 KB a 3,6 KB
 
-   ![img](img/captura21.png)
+     ![img](img/captura21.png)
 
   
   ## 5. CREAR UNA PÁGINA QUE SE MOSTRARÁ AL ACCEDER A UNA RUTA QUE NO EXISTA (404.html), SITUADA EN _/var/www/errores_.
@@ -260,29 +260,29 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
 - Primero, creamos el directorio errores en la ruta _/var/wwww/_ y a continuación creamos el archivo 404.html dentro de este directorio:
 
- ![img](img/captura24.png)
+  ![img](img/captura24.png)
 
 - Insertamos el mensaje de error en el archivo:
 
- ![img](img/captura25.png)
+  ![img](img/captura25.png)
 
 - Damos permisos de acceso a la carpeta errores.
 
 - Modificamos el archivo de configuración de nuestro host (sitioPhp) dentro de la ruta _/etc/nginx/sites-available_, añadiendo la siguiente directiva:
 
- ![img](img/captura26.png)
+  ![img](img/captura26.png)
 
 - Verificamos sintaxis y relanzamos el servidor.
 
 - Vamos al navegador, introducimos una ruta que no existe y nos muestra nuestro mensaje de error.
 
- ![img](img/captura27.png)
+  ![img](img/captura27.png)
 
 ## 6. AL ACCEDER A LA RUTA _http://localhost:82/public_files_, MOSTRAR UN LISTADO DE LOS FICHEROS QUE ALBERGA, EN FORMATO JSON.
 
 - Primero, creamos la carpeta _public_files_ en la ruta de nuestra página (_/var/www/sitioPhp_) y añadimos 3 archivos html. 
 
-![img](img/captura28.png)
+  ![img](img/captura28.png)
 
 No necesitamos agregar contenido a los ficheros, porque solo vamos a listar sus nombres.
 
@@ -293,7 +293,7 @@ No necesitamos agregar contenido a los ficheros, porque solo vamos a listar sus 
     - autoindex on: Nos permite visualizar el contenido del directorio.
     - autoindex_format json: visualizaremos la lista del contenido en formato json.
 
-    ![img](img/captura29.png)
+      ![img](img/captura29.png)
 
 - Verificamos sintaxis, relanzamos servidor.
 
@@ -329,75 +329,37 @@ No necesitamos agregar contenido a los ficheros, porque solo vamos a listar sus 
 
   ![img](img/captura35.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+***
 
 # SITIO 2
 
 Este segundo sitio permitirá acceder a una aplicación NodeJs que debe estar
-ejecutándose en el puerto 3000 de nuestra máquina. Además, como requisitos, debe
-cumplir:
-
-- Estar publicado en el puerto 81
-- El directorio donde se encuentra el contenido del sitio será /var/www/sitioNode
-- Los logs se sitúan en el directorio /etc/logs/sitioNode
-- Dispone de una página que se mostrará al acceder a una ruta que no exista.
-    - Esta página (404.html) estará situada en /var/www/errores
-- Al acceder a http://localhost:81/documentación se producirá una redirección a la página oficial de nodejs (https://nodejs.org/en/)
+ejecutándose en el puerto 3000 de nuestra máquina.
 
 
+**Requisitos**
 
+1. Estar publicado en el puerto 81.
+2. El directorio donde se encuentra el contenido del sitio será /var/www/sitioNode.
+3. Los logs se sitúan en el directorio /etc/logs/sitioNode.
+4. Dispone de una página que se mostrará al acceder a una ruta que no exista.
+5. Esta página (404.html) estará situada en /var/www/errores.
+6. Al acceder a http://localhost:81/documentación se producirá una redirección a la página oficial de nodejs (https://nodejs.org/en/)
+
+
+## PUNTO 1, 2 Y 3. MONTAJE Y CONFIGURACIÓN. PUERTOS Y LOGS.
+
+- Creamos una aplicación Nodejs en el directorio que queramos, en nuestro caso, _/home/sandra/Escritorio/practicaNginx/aplicacionNode_, el directorio aplicación node, contiene nuestro _index.js_ ejecutándose por el puerto 3000 y el _package.json_.
+
+- Confirmarmos que nuestra aplicación funciona y se ejecuta por el puerto 3000.
+
+***
+
+## ENLACE A GITHUB PAGES.
+
+https://sanesga.github.io/nginx.github.io/
+
+***
 
 
 
