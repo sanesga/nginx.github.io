@@ -90,7 +90,7 @@ Este primer sitio permitirá visualizar una página php.
 7. No permitirá el acceso al contenido de nuestro servidor cuando en el path del contenido a obtener, se encuentre la palabra private.
 
 
-## 1. ESTAR PUBLICADO EN EL PUERTO 82
+## 1 y 2. GUARDAR EL CONTENIDO DEL SITIO EN LA RUTA /var/www/sitioPhp Y PUBLICAR LA PÁGINA EN EL PUERTO 82.
 
 - Iniciamos el servidor Nginx
 
@@ -151,15 +151,19 @@ Este primer sitio permitirá visualizar una página php.
 
   - Le damos un nombre a nuestro servidor:
 
-   ![img](img/captura13.png)
+     ![img](img/captura13.png)
 
   - Modificamos el directorio donde se encuentra nuestra página:
 
-    ![img](img/captura11.png)
+     ![img](img/captura11.png)
 
   - Añadimos index.php tal como nos indica en el archivo de configuración, para que se reconozca nuestra aplicación:
 
-   ![img](img/captura12.png)
+     ![img](img/captura12.png)
+
+  - Descomentamos la configuración de php para FastCGI server como vemos en la imagen siguiente, cambiando la versión de php por la que hay instalada en el equipo (7.2). El php-fpm se encargará de procesar la petición que se realiza en el navegador para visualizar nuestra página.
+
+     ![img](img/captura15.png)
 
   - Habilitamos el sitio, creando un enlace simbólico dentro de la carpeta _sites-enabled_ que hará referencia al fichero de configuración de nuestro host, creado en el directorio _sites-available_:
 
@@ -169,7 +173,21 @@ Este primer sitio permitirá visualizar una página php.
 
     ![img](img/captura10.png)
 
-    - Verificamos sintaxis.
+  - Verificamos que tengamos php instalado en el equipo para poder visualizar la página:
+
+    ```
+    php -v
+    ```
+
+    ![img](img/captura14.png)
+
+  - En caso de no tenerlo instalado, tecleamos el siguiente comando:
+
+    ```
+    sudo apt install php-7.2
+    ```
+
+  - Verificamos sintaxis.
  
     ```
     sudo nginx -t
@@ -183,11 +201,74 @@ Este primer sitio permitirá visualizar una página php.
     sudo service nginx reload
     ```
 
-  - Instalar php
-  sudo apt install php-7.2
-  php -v
-  - Donar permisos a totes les carpetes
-  - descomentar la part de php canviant la versio
+  - Abrimos el navegador y visualizamos la página en la ruta _localhost:82_:
+
+    ![img](img/captura16.png)
+
+
+## 3. SITUAR LOS LOGS EN EL DIRECTORIO /etc/logs/sitioPhp
+
+- Creamos la estructura de carpetas especificada en la ruta:
+
+  ![img](img/captura18.png)
+
+
+- Añadimos la directiva _access_log_ con su ruta, en el archivo de configuración de nuestro host (sitioPhp) situado en la ruta _/etc/nginx/sites-available_. Especificando asímismo el nombre que queremos darle al archivo de logs (se creará automáticamente).
+
+
+![img](img/captura17.png)
+
+- Verificamos sintaxis.
+
+- Reiniciamos servidor-
+
+- Verificamos que el archivo se ha creado correctamente en la ruta y verificamos que guarde los logs:
+
+![img](img/captura19.png)
+
+## 4. ACTIVAR LA COMPRESIÓN DE FICHEROS QUE SUPEREN LOS 80KB.
+
+Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de la compresión y descompresión de ficheros.
+
+- Primero, creamos una carpeta nueva llamada _plantilla_ en el directorio de nuestra aplicación (_/var/etc/wwww/sitioPhp_) y dentro nos descargamos la plantilla css del siguiente enlace: https://startbootstrap.com/themes/freelancer/
+
+![img](img/captura23.png)
+
+- Entramos en el navegador y accedemos a la plantilla desde nuestra página en localhost:82/plantilla/ y en el apartado Network, observamos que su tamaño inicial es de 24,5 KB.
+
+![img](img/captura22.png)
+
+- Para proceder con la compresión, primero habilitamos Gzip en nuestro servidor:
+
+   - Vamos al fichero de configuración principal, _nginx.conf_ situado en la ruta _/etc/nginx/_.
+
+   - En el apartado Gzip Settings, establecemos la directiva Gzip a on, descomentando todas las opciones y añadiendo _gzip_min_length 80;_ para que se aplique la compresión a los archivos mayores de 80 KB, como es nuestro caso.
+
+    ![img](img/captura20.png)
+
+  - Verificamos sintaxis.
+
+  - Reinciamos servidor.
+
+  - Volvemos a entrar al navegador y comprobamos que los datos se han comprimido y el tamaño ha pasado de 24,5 KB a 3,6 KB
+
+   ![img](img/captura21.png)
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
