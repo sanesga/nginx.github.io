@@ -255,6 +255,83 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
    ![img](img/captura21.png)
 
   
+  ## 5. CREAR UNA PÁGINA QUE SE MOSTRARÁ AL ACCEDER A UNA RUTA QUE NO EXISTA (404.html), SITUADA EN _/var/www/errores_.
+
+
+- Primero, creamos el directorio errores en la ruta _/var/wwww/_ y a continuación creamos el archivo 404.html dentro de este directorio:
+
+ ![img](img/captura24.png)
+
+- Insertamos el mensaje de error en el archivo:
+
+ ![img](img/captura25.png)
+
+- Damos permisos de acceso a la carpeta errores.
+
+- Modificamos el archivo de configuración de nuestro host (sitioPhp) dentro de la ruta _/etc/nginx/sites-available_, añadiendo la siguiente directiva:
+
+ ![img](img/captura26.png)
+
+- Verificamos sintaxis y relanzamos el servidor.
+
+- Vamos al navegador, introducimos una ruta que no existe y nos muestra nuestro mensaje de error.
+
+ ![img](img/captura27.png)
+
+## 6. AL ACCEDER A LA RUTA _http://localhost:82/public_files_, MOSTRAR UN LISTADO DE LOS FICHEROS QUE ALBERGA, EN FORMATO JSON.
+
+- Primero, creamos la carpeta _public_files_ en la ruta de nuestra página (_/var/www/sitioPhp_) y añadimos 3 archivos html. 
+
+![img](img/captura28.png)
+
+No necesitamos agregar contenido a los ficheros, porque solo vamos a listar sus nombres.
+
+- Damos permisos al directorio.
+
+- Vamos al archivo de configuración de nuestro host virtual (_/etc/nginx/sites-available/sitioPhp) y añadimos las siguientes directivas:
+
+    - autoindex on: Nos permite visualizar el contenido del directorio.
+    - autoindex_format json: visualizaremos la lista del contenido en formato json.
+
+    ![img](img/captura29.png)
+
+- Verificamos sintaxis, relanzamos servidor.
+
+- Vamos al navegador y visualizamos el resultado:
+
+  ![img](img/captura30.png)
+
+## 7. NO PERMITIR EL ACCESO AL CONTENIDO DE NUESTRO SERVIDOR CUANDO EN EL PATH DEL CONTENIDO A OBTENER, SE ENCUENTRE LA PALABRA PRIVATE.
+
+- Para empezar, creamos un directorio con la palabra private, en la ruta _/var/www/sitioPhp_, al que llamamos _private_files_:
+
+  ![img](img/captura31.png)
+
+- Insertamos dentro del directorio, 3 páginas html:
+
+  ![img](img/captura34.png)
+
+- Otorgamos permisos de acceso.
+
+- Por defecto, si intentamos acceder al directorio private_files, Nginx no nos lo permitirá, mostrando la pantalla de error 403 Forbidden, ya que no hemos habilitado que liste el contenido de este directorio, sin embargo, si accedemos a localhost:82/private_files/pagina1.html, sí que nos permite entrar. 
+
+- Para bloquear el acceso tanto al directorio como a su contenido, vamos al fichero de configuración de nuesto host y añadimos un patrón regex para todos los directorios que contengan el nombre private:
+
+  ![img](img/captura32.png)
+
+- Vamos al navegador y verificamos que funciona:
+
+  - A nivel de carpeta:
+
+  ![img](img/captura33.png)
+
+  - Y a nivel de contenido:
+
+  ![img](img/captura35.png)
+
+
+
+
 
 
 
