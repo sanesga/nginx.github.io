@@ -234,7 +234,7 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
   ![img](img/captura23.png)
 
-- Entramos en el navegador y accedemos a la plantilla desde nuestra página en localhost:82/plantilla/ y en el apartado Network, observamos que su tamaño inicial es de 24,5 KB.
+- Entramos en el navegador y accedemos a la plantilla desde nuestra página en localhost:82/plantilla/ y en el apartado Network (parte inferior derecha) observamos que su tamaño inicial es de 784 KB transferidos.
 
   ![img](img/captura22.png)
 
@@ -250,7 +250,7 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
   - Reinciamos servidor.
 
-  - Volvemos a entrar al navegador y comprobamos que los datos se han comprimido y el tamaño ha pasado de 24,5 KB a 3,6 KB
+  - Volvemos a entrar al navegador y comprobamos que los datos se han comprimido y el tamaño de KB transferidos a pasado de 784 a 454.
 
      ![img](img/captura21.png)
 
