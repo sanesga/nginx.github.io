@@ -83,10 +83,10 @@ Este primer sitio permitirá visualizar una página php.
 
 1. Estar publicada en el puerto 82.
 2. El directorio donde se encuentra el contenido del sitio será /var/www/sitioPhp.
-3. Los logs se situarán en el directorio /etc/logs/sitioPhp
-4. Debe tener activada la compresión de ficheros que superen los 80kb.
-5. Dispondrá de una página que se mostrará al acceder a una ruta que no exista (404.html), que estará situada en /var/www/errores.
-6. Al acceder al path http://localhost:82/public_files, el sitio web mostrará el listado de ficheros en formato json.
+3. Los logs se situarán en el directorio /etc/logs/sitioPhp.
+4. Debe tener activada la compresión para ficheros que superen los 80kb.
+5. Dispondrá de una página que se mostrará al acceder a una ruta que no exista (404.html), situada en /var/www/errores.
+6. Al acceder al path http://localhost:82/public_files, el sitio web mostrará el listado de ficheros en formato JSON.
 7. No permitirá el acceso al contenido de nuestro servidor cuando en el path del contenido a obtener, se encuentre la palabra private.
 
 
@@ -218,9 +218,7 @@ Este primer sitio permitirá visualizar una página php.
 
   ![img](img/captura17.png)
 
-- Verificamos sintaxis.
-
-- Reiniciamos servidor.
+- Verificamos sintaxis y reiniciamos el servidor.
 
 - Verificamos que el archivo se ha creado correctamente en la ruta y verificamos que guarde los logs:
 
@@ -230,7 +228,7 @@ Este primer sitio permitirá visualizar una página php.
 
 Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de la compresión y descompresión de ficheros.
 
-- Primero, creamos una carpeta nueva llamada _plantilla_ en el directorio de nuestra aplicación (_/var/etc/wwww/sitioPhp_) y dentro nos descargamos la plantilla css del siguiente enlace: https://startbootstrap.com/themes/freelancer/
+- Primero, creamos una carpeta nueva llamada _plantilla_ en el directorio de nuestra aplicación (_/var/etc/wwww/sitioPhp_) y dentro nos descargamos una plantilla css del siguiente enlace: https://startbootstrap.com/themes/freelancer/
 
   ![img](img/captura23.png)
 
@@ -246,9 +244,7 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
 
      ![img](img/captura20.png)
 
-  - Verificamos sintaxis.
-
-  - Reinciamos servidor.
+  - Verificamos sintaxis y reiniciamos el servidor.
 
   - Volvemos a entrar al navegador y comprobamos que los datos se han comprimido y el tamaño de KB transferidos a pasado de 784 a 454.
 
@@ -258,7 +254,7 @@ Para ello utilizaremos **Gzip**. Gzip es un módulo de Nginx que se encarga de l
   ## 5. CREAR UNA PÁGINA QUE SE MOSTRARÁ AL ACCEDER A UNA RUTA QUE NO EXISTA (404.html), SITUADA EN _/var/www/errores_.
 
 
-- Primero, creamos el directorio errores en la ruta _/var/wwww/_ y a continuación creamos el archivo 404.html dentro de este directorio:
+- Primero, creamos el directorio errores en la ruta _/var/www/_ y a continuación creamos el archivo 404.html dentro de este directorio:
 
   ![img](img/captura24.png)
 
@@ -354,7 +350,7 @@ ejecutándose en el puerto 3000 de nuestra máquina.
 
     ![img](img/captura36.png)
 
-- Entramos en el navegador:
+- La visualizamos en el navegador:
 
     ![img](img/captura37.png)
 
@@ -381,15 +377,15 @@ ejecutándose en el puerto 3000 de nuestra máquina.
 
        ![img](img/captura40.png)
 
-    - Cambiamos la ruta donde está situada nuestra aplicación:
+    - Cambiamos la ruta donde está nuestro virtual host:
 
        ![img](img/captura41.png)
 
     - Cambiamos el nombre del servidor:
 
-       ![img](img/captura42.png)
+       ![img](img/captura13.png)
 
-    - Para que se muestre nuestra aplicación funcionando cuando accedemos a nuestro sitio, necesitamos añadir la directiva proxy_pass:
+    - Para que se muestre nuestra aplicación funcionando cuando accedemos a nuestro sitio, necesitamos añadir la directiva proxy_pass, dentro de _location_:
 
       ![img](img/captura44.png)
 
@@ -426,7 +422,7 @@ ejecutándose en el puerto 3000 de nuestra máquina.
   ![img](img/captura46.png)
 
 
-- Añadimos la directiva _access_log_ especificando la nueva ruta, en el archivo de configuración de nuestro host (sitioNode) situado en la ruta _/etc/nginx/sites-available_. Especificando asímismo el nombre que queremos darle al archivo de logs (el cual se creará automáticamente).
+- Añadimos la directiva _access_log_ especificando la nueva ruta, en el archivo de configuración de nuestro host (sitioNode), situado en la ruta _/etc/nginx/sites-available_. Especificando asímismo el nombre que queremos darle al archivo de logs (el cual se creará automáticamente).
 
   ![img](img/captura47.png)
 
