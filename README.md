@@ -220,7 +220,7 @@ Este primer sitio permitirá visualizar una página php.
 
 - Verificamos sintaxis.
 
-- Reiniciamos servidor-
+- Reiniciamos servidor.
 
 - Verificamos que el archivo se ha creado correctamente en la ruta y verificamos que guarde los logs:
 
@@ -339,19 +339,128 @@ ejecutándose en el puerto 3000 de nuestra máquina.
 
 **Requisitos**
 
-1. Estar publicado en el puerto 81.
+1. Estar publicada en el puerto 81.
 2. El directorio donde se encuentra el contenido del sitio será /var/www/sitioNode.
-3. Los logs se sitúan en el directorio /etc/logs/sitioNode.
-4. Dispone de una página que se mostrará al acceder a una ruta que no exista.
-5. Esta página (404.html) estará situada en /var/www/errores.
-6. Al acceder a http://localhost:81/documentación se producirá una redirección a la página oficial de nodejs (https://nodejs.org/en/)
+3. Los logs se almacenarán en el directorio /etc/logs/sitioNode.
+4. Dispondrá de una página que se mostrará al acceder a una ruta que no exista (404.html), situada en /var/www/errores.
+6. Al acceder a http://localhost:81/documentación se producirá una redirección a la página oficial de nodejs (https://nodejs.org/en/).
 
 
-## PUNTO 1, 2 Y 3. MONTAJE Y CONFIGURACIÓN. PUERTOS Y LOGS.
+## 1 y 2. GUARDAR EL CONTENIDO DEL SITIO EN LA RUTA /var/www/sitioNode Y PUBLICAR LA PÁGINA EN EL PUERTO 81.
 
-- Creamos una aplicación Nodejs en el directorio que queramos, en nuestro caso, _/home/sandra/Escritorio/practicaNginx/aplicacionNode_, el directorio aplicación node, contiene nuestro _index.js_ ejecutándose por el puerto 3000 y el _package.json_.
+- Creamos una aplicación Nodejs en el directorio que queramos, en nuestro caso, _/home/sandra/Escritorio/nginx.github.io/paginas/aplicacionNode_. El directorio aplicación node, contiene nuestro _index.js_ ejecutándose por el puerto 3000 y el _package.json_.
 
-- Confirmarmos que nuestra aplicación funciona y se ejecuta por el puerto 3000.
+- Ejecutamos la aplicación:
+
+    ![img](img/captura36.png)
+
+- Entramos en el navegador:
+
+    ![img](img/captura37.png)
+
+- Procedemos a crear nuestro virtual host:
+
+  - El directorio donde se encuentra el contenido del sitio será /var/www/sitioNode.
+  - Creamos el directorio sitioNode:
+
+    ![img](img/captura38.png)
+
+  - Le otorgamos permisos:
+
+    ```
+    sudo chmod -R 755 /var/www/sitioNode
+    ```
+
+  - Creamos el archivo de configuración del sitio, en la ruta /etc/nginx/sites-available, copiando el que nos proporciona Nginx por defecto (default), situado en la misma carpeta y renombrándolo a sitioNode.
+
+    ![img](img/captura39.png)
+
+  - Editamos el archivo:
+
+    - Cambiamos el puerto:
+
+       ![img](img/captura40.png)
+
+    - Cambiamos la ruta donde está situada nuestra aplicación:
+
+       ![img](img/captura41.png)
+
+    - Cambiamos el nombre del servidor:
+
+       ![img](img/captura42.png)
+
+    - Para que se muestre nuestra aplicación funcionando cuando accedemos a nuestro sitio, necesitamos añadir la directiva proxy_pass:
+
+      ![img](img/captura44.png)
+
+
+- Verificamos sintaxis:
+        
+  ```
+  sudo nginx -t
+  ```
+
+- Habilitamos el sitio, creando un enlace simbólico dentro de la carpeta _sites-enabled_ que hará referencia al fichero de configuración de nuestro host, creado en el directorio _sites-available_:
+
+  ```
+  sudo ln -s /etc/nginx/sites-available/sitioNode /etc/nginx/sites-enabled
+  ```
+
+  ![img](img/captura43.png)
+
+- Reiniciamos el servidor:
+
+  ```
+  sudo service nginx restart
+  ```
+
+- Abrimos el navegador:
+
+  ![img](img/captura45.png)
+
+
+## 3. SITUAR LOS LOGS EN EL DIRECTORIO /etc/logs/sitioNode.
+
+- Creamos la carpeta sitioNode en la ruta /etc/logs:
+
+  ![img](img/captura46.png)
+
+
+- Añadimos la directiva _access_log_ especificando la nueva ruta, en el archivo de configuración de nuestro host (sitioNode) situado en la ruta _/etc/nginx/sites-available_. Especificando asímismo el nombre que queremos darle al archivo de logs (el cual se creará automáticamente).
+
+  ![img](img/captura47.png)
+
+- Verificamos sintaxis y reiniciamos servidor.
+
+- Verificamos que el archivo se ha creado correctamente en la ruta y verificamos que guarde los logs:
+
+  ![img](img/captura48.png)
+
+## 4. CREAR UNA PÁGINA QUE SE MOSTRARÁ AL ACCEDER A UNA RUTA QUE NO EXISTA (404.html), SITUADA EN _/var/www/errores_.
+
+- Reutilizaremos la página creada en el sitio anterior.
+
+- Modificamos el archivo de configuración de nuestro host (sitioNode) dentro de la ruta _/etc/nginx/sites-available_, añadiendo la siguiente directiva:
+
+  ![img](img/captura26.png)
+
+- Verificamos sintaxis y reiniciamos el servidor.
+
+- Vamos al navegador, introducimos una ruta que no existe y nos muestra nuestro mensaje de error.
+
+  ![img](img/captura49.png)
+
+## 6. AL ACCEDER A http://localhost:81/documentación REDIRIGIR A LA PÁGINA OFICIAL DE NODEJS (https://nodejs.org/en/).
+
+- Modificamos el archivo de configuración de nuestro host (sitioNode) dentro de la ruta _/etc/nginx/sites-available_, añadiendo la siguiente directiva:
+
+  ![img](img/captura50.png)
+
+- Verificamos sintaxis, reiniciamos servidor.
+
+- Accedemos a localhost:81/documentacion en nuestro navegador:
+
+  ![img](img/captura51.png)
 
 ***
 
